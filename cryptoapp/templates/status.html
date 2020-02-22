@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+    
+{% block title %} Estado de la inversion {% endblock %}
+
+{% block content %}
+    <nav>
+        <a href="/">Inicio</a> / 
+        <a href="purchase">Comprar</a> / 
+        <a class="deact" href="status">Status</a>
+    </nav>
+    <h1>BALANCE</h1>
+    <div>
+        {% if mensaje %}
+            <p class="field-error">{{ mensaje }}</p>
+        {% endif %}
+        <p>Invertido:  {{euros_invertidos}}</p>
+        <p>Valor actual:  {{valor_actual}}</p>
+    </div>
+    <div class="button">
+        <a class="" href="/">Volver</a>
+    </div>
+{% endblock %}

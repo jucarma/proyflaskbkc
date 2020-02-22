@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+    
+{% block title %} Pagina de movimientos {% endblock %}
+
+{% block content %}
+    <style></style>
+    <nav>
+        <a class="deact" href="">Inicio</a> / 
+        <a href="purchase">Compra</a> / 
+        <a href="status">Status</a>
+    </nav>
+    <h1>MOVIMIENTOS</h1>
+    <div>
+        <table class="reegion_table">
+            <tr>
+                
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>From</th>
+                <th>Q</th>
+                <th>To</th>
+                <th>Q</th>
+                <th>P.U.</th>
+                
+            </tr>
+            <tfoot class="u-full-width">
+                
+                {% if o: %}
+                    <p class="field-error">DB ERROR, try again</p>
+                {% endif %}
+            </tfoot>
+            <tbody>
+                {% if listado | length == 0 %}
+                    <tr>
+                        <td colspan="7">Sin movimientos</td>
+                    </tr>
+                {% endif %}
+                
+                {% for linea in listado %}
+                    <tr>
+                        <td>{{linea[1]}}</td>
+                        <td>{{linea[2]}}</td>
+                        <td>{{linea[3]}}</td>
+                        <td>{{linea[4]}}</td>
+                        <td>{{linea[5]}}</td>
+                        <td>{{linea[6]}}</td>
+                        <td>{{linea[7]}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="u-full-width">
+        <div class="button">
+            <a class="" href="status">Status</a>
+        </div>
+        <div class="button">
+            <a class="" href="purchase">Comprar</a>
+        </div>
+    </div>
+{% endblock %}

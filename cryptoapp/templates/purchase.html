@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+    
+{% block title %} Comprar Cryptos {% endblock %}
+
+{% block content %}
+    <nav>
+        <a href="/">Inicio</a> / 
+        <a class="deact" href="">Comprar</a> / 
+        <a href="status">Status</a>
+    </nav>
+    <h1>COMPRAR CRYPTOS</h1>
+    <div class="container">
+        <form class="pure-form" action="/purchase" method="POST">
+            {{ form.hidden_tag() }}
+        {% if o: %}
+            <p class="field-error">DB ERROR, try again</p>
+        {% endif %}
+        {% if mensaje: %}
+            <p class="field-error">{{ mensaje }}</p>
+        {% endif %}
+        <div class="u-full-width">
+            <div>
+                <p>From:</p>
+                {{ form.desde() }}
+                {% if form.desde.errors %}
+                    {% for error in form.desde.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="u-full-width">
+                <p>To:</p>
+                {{ form.convertir_a() }}
+                {% if form.convertir_a.errors %}
+                    {% for error in form.convertir_a.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="u-full-width">
+            <div class="fx">
+                <p>Q</p>
+                {{ form.cuantia(type="number") }}
+                {{ form.calc(class="pure-button pure-button-secondary pure-button-active") }}
+                {% if form.cuantia.errors %}
+                    {% for error in form.cuantia.errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="fx">
+            <p>QCuantity</p>
+                {% if qcuantity %}
+                    <input class="negro" type="text" name="qcuantity" id="qcuantity" value="{{qcuantity}}" disabled>
+                    <input type="hidden" name="qcuantityh" id="qcuantityh" value="{{qcuantity}}">
+                {% else %}
+                    <input type="text" name="qcuantity" id="qcuantity" value="" disabled>
+                    <input type="hidden" name="qcuantityh" id="qcuantityh" value="">
+                {% endif %}
+            </div>
+        </div>
+        <div class="u-full-width">
+           
+            <p>P.U.</p>
+                {% if qcuantity_unitario %}
+                    <input class="negro" type="text" name="qcuantity_unitario" id="qcuantity_unitario" value="{{qcuantity_unitario}}" disabled>
+                    <input type="hidden" name="qcuantity_unitarioh" id="qcuantity_unitarioh" value="{{qcuantity_unitario}}">
+                {% else %}
+                    <input type="text" name="qcuantity_unitario" id="qcuantity_unitario" value="" disabled>
+                    <input type="hidden" name="qcuantity_unitarioh" id="qcuantity_unitarioh" value="">
+                {% endif %}
+            
+        </div>
+        <div class="container">
+            <div class="button">
+                <a href="">Reiniciar</a>
+            </div>
+            <div class="button">
+                <a href="/">Cancelar</a>
+            </div>
+            <div>
+                {% if not qcuantity %}
+                    {{ form.ok(class="pure-button", disabled=True) }}
+                {% else %}
+                    {{ form.ok(class="pure-button pure-button-secondary pure-button-active") }}
+                {% endif %}
+            </div>
+        </div>
+            
+        </form>
+    </div>
+{% endblock %}
